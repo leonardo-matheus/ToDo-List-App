@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyTudo</string>
+    
+    <!-- Auth -->
+    <string name="login">Entrar</string>
+    <string name="register">Registrar</string>
+    <string name="email">E-mail</string>
+    <string name="password">Senha</string>
+    <string name="username">Nome de usuário</string>
+    <string name="dont_have_account">Não tem uma conta? Registre-se</string>
+    <string name="already_have_account">Já tem uma conta? Entre</string>
+    
+    <!-- Navigation -->
+    <string name="home">Início</string>
+    <string name="lists">Listas</string>
+    <string name="calendar">Calendário</string>
+    <string name="settings">Configurações</string>
+    <string name="folders">Listas</string>
+    
+    <!-- Lists -->
+    <string name="my_lists">Minhas Listas</string>
+    <string name="new_list">Nova Lista</string>
+    <string name="new_folder">Nova Lista</string>
+    <string name="edit_list">Editar Lista</string>
+    <string name="list_name">Nome da lista</string>
+    <string name="no_lists">Nenhuma lista criada.\nToque no + para criar uma.</string>
+    <string name="list_count">%d Listas</string>
+    
+    <!-- Tasks -->
+    <string name="tasks">Tarefas</string>
+    <string name="new_task">Nova Tarefa</string>
+    <string name="edit_task">Editar Tarefa</string>
+    <string name="task_title">Título da tarefa</string>
+    <string name="task_description">Descrição (opcional)</string>
+    <string name="no_tasks">Nenhuma tarefa nesta lista.\nToque no + para criar uma.</string>
+    <string name="add_task">Adicionar Tarefa</string>
+    <string name="upcoming">Próximas</string>
+    <string name="today">Hoje</string>
+    <string name="completed">Concluídas</string>
+    
+    <!-- Reminder -->
+    <string name="set_reminder">Definir Lembrete</string>
+    <string name="clear_reminder">Limpar</string>
+    <string name="reminder_set">Lembrete definido</string>
+    
+    <!-- Actions -->
+    <string name="save">Salvar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="delete">Deletar</string>
+    <string name="logout">Sair</string>
+    <string name="sync">Sincronizar</string>
+    <string name="back">Voltar</string>
+    <string name="filter">Filtrar</string>
+    <string name="more">Mais opções</string>
+    <string name="edit">Editar</string>
+    <string name="create_list">Criar item</string>
+    
+    <!-- Settings -->
+    <string name="profile">PERFIL</string>
+    <string name="account">CONTA</string>
+    <string name="dark_mode">Modo Escuro</string>
+    <string name="language">Idioma</string>
+    <string name="portuguese">Português (BR)</string>
+    <string name="birthday">Data de nascimento</string>
+    <string name="delete_account">Excluir Conta</string>
+    
+    <!-- Messages -->
+    <string name="confirm_delete_list">Tem certeza que deseja deletar esta lista e todas as suas tarefas?</string>
+    <string name="confirm_delete_task">Tem certeza que deseja deletar esta tarefa?</string>
+    <string name="confirm_logout">Tem certeza que deseja sair?</string>
+    <string name="sync_success">Sincronizado com sucesso!</string>
+    <string name="sync_error">Erro na sincronização</string>
+    <string name="loading">Carregando...</string>
+    
+    <!-- Profile Update -->
+    <string name="change_name">Alterar Nome</string>
+    <string name="change_email">Alterar E-mail</string>
+    <string name="change_password">Alterar Senha</string>
+    <string name="new_name">Novo nome</string>
+    <string name="new_email">Novo e-mail</string>
+    <string name="current_password">Senha atual</string>
+    <string name="new_password">Nova senha</string>
+    <string name="confirm_new_password">Confirmar nova senha</string>
+    <string name="name_updated">Nome atualizado com sucesso!</string>
+    <string name="email_updated">E-mail atualizado com sucesso!</string>
+    <string name="password_updated">Senha atualizada com sucesso!</string>
+    <string name="error_updating">Erro ao atualizar</string>
+    <string name="password_required">Digite sua senha atual</string>
+    <string name="passwords_dont_match">As senhas não coincidem</string>
+    <string name="field_required">Campo obrigatório</string>
+</resources>

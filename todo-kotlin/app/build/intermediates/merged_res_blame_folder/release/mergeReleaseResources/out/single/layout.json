@@ -1,0 +1,94 @@
+[
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/activity_main.xml",
+        "source": "com.example.todo.app-main-61:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/item_task_modern.xml",
+        "source": "com.example.todo.app-main-61:/layout/item_task_modern.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/fragment_forgot_password.xml",
+        "source": "com.example.todo.app-main-61:/layout/fragment_forgot_password.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/fragment_settings.xml",
+        "source": "com.example.todo.app-main-61:/layout/fragment_settings.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/dialog_create_task.xml",
+        "source": "com.example.todo.app-main-61:/layout/dialog_create_task.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/dialog_create_list.xml",
+        "source": "com.example.todo.app-main-61:/layout/dialog_create_list.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/fragment_verify.xml",
+        "source": "com.example.todo.app-main-61:/layout/fragment_verify.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/fragment_reset_verify_code.xml",
+        "source": "com.example.todo.app-main-61:/layout/fragment_reset_verify_code.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/activity_lists.xml",
+        "source": "com.example.todo.app-main-61:/layout/activity_lists.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/item_add_folder.xml",
+        "source": "com.example.todo.app-main-61:/layout/item_add_folder.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/item_folder_grid.xml",
+        "source": "com.example.todo.app-main-61:/layout/item_folder_grid.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/item_task.xml",
+        "source": "com.example.todo.app-main-61:/layout/item_task.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/fragment_reset_password.xml",
+        "source": "com.example.todo.app-main-61:/layout/fragment_reset_password.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/item_list_modern.xml",
+        "source": "com.example.todo.app-main-61:/layout/item_list_modern.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/activity_main_new.xml",
+        "source": "com.example.todo.app-main-61:/layout/activity_main_new.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/fragment_list_detail.xml",
+        "source": "com.example.todo.app-main-61:/layout/fragment_list_detail.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/item_list.xml",
+        "source": "com.example.todo.app-main-61:/layout/item_list.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/fragment_home.xml",
+        "source": "com.example.todo.app-main-61:/layout/fragment_home.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/activity_tasks.xml",
+        "source": "com.example.todo.app-main-61:/layout/activity_tasks.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/activity_auth.xml",
+        "source": "com.example.todo.app-main-61:/layout/activity_auth.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/fragment_login.xml",
+        "source": "com.example.todo.app-main-61:/layout/fragment_login.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/fragment_register.xml",
+        "source": "com.example.todo.app-main-61:/layout/fragment_register.xml"
+    },
+    {
+        "merged": "com.example.todo.app-mergeReleaseResources-58:/layout/item_task_group.xml",
+        "source": "com.example.todo.app-main-61:/layout/item_task_group.xml"
+    }
+]

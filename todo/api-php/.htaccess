@@ -1,0 +1,53 @@
+# Todo App API - Apache Configuration
+
+# Habilitar Rewrite Engine
+RewriteEngine On
+
+# Definir base
+RewriteBase /
+
+# Handle Authorization Header (importante para JWT)
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# Também para CGI/FastCGI
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+
+# Não redirecionar arquivos existentes
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirecionar tudo para index.php
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Permitir acesso ao index.php
+<Files "index.php">
+    Order Allow,Deny
+    Allow from all
+</Files>
+
+# CORS Headers
+<IfModule mod_headers.c>
+    Header always set Access-Control-Allow-Origin "*"
+    Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+    Header always set Access-Control-Max-Age "3600"
+</IfModule>
+
+# Handle OPTIONS requests (preflight)
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
+
+# Tipo de conteúdo padrão
+AddDefaultCharset UTF-8
+
+# Desabilitar listagem de diretórios
+Options -Indexes
+
+# PHP Settings (se aplicável)
+<IfModule mod_php.c>
+    php_value upload_max_filesize 10M
+    php_value post_max_size 10M
+    php_value max_execution_time 60
+    php_flag display_errors Off
+</IfModule>

@@ -1,0 +1,58 @@
+[package]
+name = "todo-api"
+version = "1.0.0"
+edition = "2021"
+authors = ["Todo App"]
+description = "Todo App REST API in Rust"
+
+[dependencies]
+# Web Framework
+actix-web = "4"
+actix-cors = "0.7"
+actix-rt = "2"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Database
+sqlx = { version = "0.7", features = ["runtime-tokio", "mysql", "chrono", "uuid"] }
+
+# Async Runtime
+tokio = { version = "1", features = ["full"] }
+
+# JWT Authentication
+jsonwebtoken = "9"
+
+# Password Hashing
+bcrypt = "0.15"
+
+# Date/Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# UUID
+uuid = { version = "1", features = ["v4", "serde"] }
+
+# Environment Variables
+dotenvy = "0.15"
+
+# Email
+lettre = { version = "0.11", features = ["tokio1", "tokio1-native-tls", "smtp-transport", "builder"] }
+
+# Random
+rand = "0.8"
+
+# MD5 Hash
+md5 = "0.7"
+
+# Logging
+env_logger = "0.10"
+log = "0.4"
+
+# Validation
+validator = { version = "0.16", features = ["derive"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

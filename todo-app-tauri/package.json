@@ -1,0 +1,16 @@
+{
+  "name": "todo-app-tauri",
+  "version": "1.0.0",
+  "description": "App de Lista de Tarefas para Android com Tauri",
+  "scripts": {
+    "dev": "cd src-tauri && cargo tauri dev",
+    "build": "cd src-tauri && cargo tauri build",
+    "android:init": "cd src-tauri && cargo tauri android init",
+    "android:dev": "cd src-tauri && cargo tauri android dev",
+    "android:build": "cd src-tauri && cargo tauri android build",
+    "android:build:release": "cd src-tauri && cargo tauri android build --release"
+  },
+  "keywords": ["tauri", "rust", "android", "todo"],
+  "author": "Desenvolvedor",
+  "license": "MIT"
+}
