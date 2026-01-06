@@ -17,28 +17,20 @@ pipeline {
             }
         }
         
-        stage('🔧 Install System Dependencies') {
-            steps {
-                sh '''
-                    echo "📦 Instalando dependências do sistema..."
-                    sudo apt-get update
-                    sudo apt-get install -y pkg-config libssl-dev build-essential
-                '''
-                echo "✅ Dependências do sistema instaladas"
-            }
-        }
-        
         stage('🦀 Setup Rust') {
             steps {
                 sh '''
-                    # Verificar se Rust está instalado
-                    if ! command -v rustc &> /dev/null; then
-                        echo "📦 Instalando Rust..."
-                        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+                    # Carregar ambiente Rust
+                    if [ -f "$HOME/.cargo/env" ]; then
+                        . $HOME/.cargo/env
                     fi
                     
-                    # Carregar ambiente Rust
-                    . $HOME/.cargo/env
+                    # Verificar se Rust está instalado
+                    if ! command -v rustc &> /dev/null; then
+                        echo "❌ Rust não instalado! Execute no servidor:"
+                        echo "sudo -u jenkins bash -c 'curl --proto =https --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y'"
+                        exit 1
+                    fi
                     
                     # Verificar versão
                     rustc --version
@@ -83,21 +75,17 @@ pipeline {
         stage('📤 Deploy') {
             steps {
                 sh '''
-                    # Criar diretório de deploy
-                    sudo mkdir -p ${DEPLOY_PATH}
-                    
                     # Copiar binário
-                    sudo cp todo-api-rust/target/release/todo-api ${DEPLOY_PATH}/
+                    cp todo-api-rust/target/release/todo-api ${DEPLOY_PATH}/
                     
                     # Copiar .env se não existir
                     if [ ! -f ${DEPLOY_PATH}/.env ]; then
-                        sudo cp todo-api-rust/.env.production ${DEPLOY_PATH}/.env
+                        cp todo-api-rust/.env.production ${DEPLOY_PATH}/.env
                         echo "⚠️ Arquivo .env criado - configure as variáveis!"
                     fi
                     
                     # Ajustar permissões
-                    sudo chown -R www-data:www-data ${DEPLOY_PATH}
-                    sudo chmod +x ${DEPLOY_PATH}/todo-api
+                    chmod +x ${DEPLOY_PATH}/todo-api
                 '''
                 echo "✅ Arquivos copiados"
             }
@@ -114,14 +102,13 @@ After=network.target mysql.service
 
 [Service]
 Type=simple
-User=www-data
-Group=www-data
+User=jenkins
+Group=jenkins
 WorkingDirectory=${DEPLOY_PATH}
 ExecStart=${DEPLOY_PATH}/todo-api
 Restart=always
 RestartSec=5
-Environment=RUST_LOG=info
-Environment=PORT=${API_PORT}
+EnvironmentFile=${DEPLOY_PATH}/.env
 
 [Install]
 WantedBy=multi-user.target
