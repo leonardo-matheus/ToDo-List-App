@@ -17,7 +17,7 @@ object RetrofitInstance {
     private const val TAG = "RetrofitInstance"
     
     // ⚠️ ALTERE PARA O IP/URL DO SEU SERVIDOR
-    private const val BASE_URL = "https://todoapp.leonardomdev.me/"
+    private const val BASE_URL = "https://191-235-32-212.nip.io/rust-api/"
     
     private var preferencesManager: PreferencesManager? = null
     
