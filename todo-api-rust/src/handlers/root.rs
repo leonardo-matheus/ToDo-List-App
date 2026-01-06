@@ -1,4 +1,4 @@
-use actix_web::{HttpResponse, web};
+use actix_web::HttpResponse;
 use serde_json::json;
 
 use crate::errors::ApiResponse;

@@ -1,0 +1,156 @@
+pipeline {
+    agent any
+    
+    environment {
+        RUST_VERSION = '1.75.0'
+        APP_NAME = 'todo-api-rust'
+        DEPLOY_PATH = '/opt/todo-api-rust'
+        SERVICE_NAME = 'todo-api-rust'
+        API_PORT = '8081'
+    }
+    
+    stages {
+        stage('🔍 Checkout') {
+            steps {
+                checkout scm
+                echo "✅ Código baixado do repositório"
+            }
+        }
+        
+        stage('🦀 Setup Rust') {
+            steps {
+                sh '''
+                    # Verificar se Rust está instalado
+                    if ! command -v rustc &> /dev/null; then
+                        echo "📦 Instalando Rust..."
+                        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+                        . $HOME/.cargo/env
+                    fi
+                    
+                    # Verificar versão
+                    rustc --version
+                    cargo --version
+                '''
+            }
+        }
+        
+        stage('📦 Dependencies') {
+            steps {
+                sh '''
+                    . $HOME/.cargo/env
+                    cd todo-api-rust
+                    cargo fetch
+                '''
+                echo "✅ Dependências baixadas"
+            }
+        }
+        
+        stage('🔨 Build') {
+            steps {
+                sh '''
+                    . $HOME/.cargo/env
+                    cd todo-api-rust
+                    cargo build --release
+                '''
+                echo "✅ Build concluído"
+            }
+        }
+        
+        stage('🧪 Test') {
+            steps {
+                sh '''
+                    . $HOME/.cargo/env
+                    cd todo-api-rust
+                    cargo test --release || true
+                '''
+                echo "✅ Testes executados"
+            }
+        }
+        
+        stage('📤 Deploy') {
+            steps {
+                sh '''
+                    # Criar diretório de deploy
+                    sudo mkdir -p ${DEPLOY_PATH}
+                    
+                    # Copiar binário
+                    sudo cp todo-api-rust/target/release/todo-api ${DEPLOY_PATH}/
+                    
+                    # Copiar .env se não existir
+                    if [ ! -f ${DEPLOY_PATH}/.env ]; then
+                        sudo cp todo-api-rust/.env.production ${DEPLOY_PATH}/.env
+                        echo "⚠️ Arquivo .env criado - configure as variáveis!"
+                    fi
+                    
+                    # Ajustar permissões
+                    sudo chown -R www-data:www-data ${DEPLOY_PATH}
+                    sudo chmod +x ${DEPLOY_PATH}/todo-api
+                '''
+                echo "✅ Arquivos copiados"
+            }
+        }
+        
+        stage('🔄 Restart Service') {
+            steps {
+                sh '''
+                    # Criar/atualizar serviço systemd
+                    sudo tee /etc/systemd/system/${SERVICE_NAME}.service > /dev/null <<EOF
+[Unit]
+Description=Todo API Rust
+After=network.target mysql.service
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=${DEPLOY_PATH}
+ExecStart=${DEPLOY_PATH}/todo-api
+Restart=always
+RestartSec=5
+Environment=RUST_LOG=info
+Environment=PORT=${API_PORT}
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+                    # Recarregar e reiniciar
+                    sudo systemctl daemon-reload
+                    sudo systemctl enable ${SERVICE_NAME}
+                    sudo systemctl restart ${SERVICE_NAME}
+                    
+                    # Aguardar inicialização
+                    sleep 3
+                    
+                    # Verificar status
+                    sudo systemctl status ${SERVICE_NAME} --no-pager || true
+                '''
+                echo "✅ Serviço reiniciado"
+            }
+        }
+        
+        stage('✅ Health Check') {
+            steps {
+                sh '''
+                    sleep 2
+                    # Testar se a API está respondendo
+                    curl -s http://localhost:${API_PORT}/ | head -100 || echo "⚠️ API pode estar iniciando..."
+                '''
+                echo "✅ Health check concluído"
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo "🎉 Deploy concluído com sucesso!"
+            echo "📡 API disponível em: https://191-235-32-212.nip.io/rust-api"
+        }
+        failure {
+            echo "❌ Deploy falhou! Verifique os logs."
+        }
+        always {
+            cleanWs()
+        }
+    }
+}

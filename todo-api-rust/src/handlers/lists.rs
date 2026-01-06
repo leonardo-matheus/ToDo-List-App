@@ -178,8 +178,7 @@ pub async fn update_list(
 
     let mut list = existing.ok_or_else(|| ApiError::not_found("Lista não encontrada"))?;
 
-    // Build update query
-    let mut updates = Vec::new();
+    // Update fields
     let mut has_updates = false;
 
     if let Some(name) = &body.name {

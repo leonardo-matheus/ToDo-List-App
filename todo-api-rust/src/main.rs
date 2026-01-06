@@ -1,7 +1,6 @@
 use actix_cors::Cors;
 use actix_web::{web, App, HttpServer, middleware::Logger};
 use sqlx::mysql::MySqlPoolOptions;
-use std::env;
 
 mod config;
 mod db;
