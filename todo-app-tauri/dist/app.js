@@ -1,5 +1,5 @@
 // ============== CONFIGURAÇÃO DA API ==============
-const API_URL = 'https://todoapp.leonardomdev.me';
+const API_URL = 'https://191-235-32-212.nip.io/rust-api';
 
 // ============== ESTADO DA APLICAÇÃO ==============
 let currentUser = null;
