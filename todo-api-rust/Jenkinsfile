@@ -19,18 +19,19 @@ pipeline {
         
         stage('🦀 Setup Rust') {
             steps {
-                sh '''
+                sh '''#!/bin/bash
                     # Carregar ambiente Rust
+                    export PATH="$HOME/.cargo/bin:$PATH"
                     if [ -f "$HOME/.cargo/env" ]; then
-                        . $HOME/.cargo/env
+                        source $HOME/.cargo/env
                     fi
                     
                     # Verificar se Rust está instalado
-                    if ! command -v rustc &> /dev/null; then
+                    which rustc || {
                         echo "❌ Rust não instalado! Execute no servidor:"
                         echo "sudo -u jenkins bash -c 'curl --proto =https --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y'"
                         exit 1
-                    fi
+                    }
                     
                     # Verificar versão
                     rustc --version
@@ -41,8 +42,8 @@ pipeline {
         
         stage('📦 Dependencies') {
             steps {
-                sh '''
-                    . $HOME/.cargo/env
+                sh '''#!/bin/bash
+                    export PATH="$HOME/.cargo/bin:$PATH"
                     cd todo-api-rust
                     cargo fetch
                 '''
@@ -52,8 +53,8 @@ pipeline {
         
         stage('🔨 Build') {
             steps {
-                sh '''
-                    . $HOME/.cargo/env
+                sh '''#!/bin/bash
+                    export PATH="$HOME/.cargo/bin:$PATH"
                     cd todo-api-rust
                     cargo build --release
                 '''
@@ -63,8 +64,8 @@ pipeline {
         
         stage('🧪 Test') {
             steps {
-                sh '''
-                    . $HOME/.cargo/env
+                sh '''#!/bin/bash
+                    export PATH="$HOME/.cargo/bin:$PATH"
                     cd todo-api-rust
                     cargo test --release || true
                 '''
